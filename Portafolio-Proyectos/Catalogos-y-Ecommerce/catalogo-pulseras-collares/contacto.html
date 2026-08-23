@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Joyería y Accesorios</title>
+    
+    <!-- Usamos el MISMO archivo de estilos -->
+    <link rel="stylesheet" href="estilos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVEGACIÓN (Igual al index) -->
+    <header>
+        <div class="logo"><img src="elementos/logo menu.png" alt="logo de la marga "></div>
+
+        <button class="menu-toggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li> <!-- Enlace para volver -->
+                <li><a href="catagolo_pulseras.html">Pulseras</a></li>
+                <li><a href="#">Collares</a></li>
+                <li><a href="contacto.html" class="active-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL DE CONTACTO -->
+    <main class="contacto-main">
+        <div class="contacto-card">
+            <h1>Hablemos</h1>
+            <p class="contacto-desc">
+                ¿Tienes alguna duda sobre un producto o deseas un diseño personalizado? 
+                Estamos aquí para asesorarte.
+            </p>
+
+            <!-- Botón WhatsApp -->
+            <a href="https://wa.me/+584125793212" target="_blank" class="btn-whatsapp-full">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382C17.112 14.192 15.343 13.308 15.011 13.192C14.68 13.078 14.437 13.02 14.195 13.403C13.951 13.787 13.264 14.628 13.054 14.877C12.844 15.127 12.635 15.166 12.274 14.973C11.915 14.781 10.755 14.382 9.381 13.118C8.318 12.14 7.601 10.933 7.42 10.605C7.24 10.279 7.401 10.106 7.581 9.921C7.743 9.755 7.942 9.488 8.122 9.277C8.303 9.066 8.363 8.913 8.483 8.663C8.604 8.414 8.544 8.184 8.453 8.011C8.363 7.838 7.642 6.017 7.342 5.29C7.051 4.581 6.757 4.678 6.554 4.668C6.368 4.66 6.152 4.658 5.936 4.658C5.72 4.658 5.37 4.741 5.07 5.086C4.769 5.431 3.918 6.273 3.918 7.981C3.918 9.688 5.07 11.202 5.251 11.452C5.431 11.7 7.583 15.132 10.995 16.666C13.844 17.947 14.417 17.691 15.018 17.633C15.619 17.575 16.96 16.828 17.241 15.984C17.522 15.141 17.522 14.413 17.432 14.259C17.342 14.106 17.132 14.037 16.772 13.845H17.472V14.382ZM12.005 2C6.48 2 2 6.48 2 12C2 13.805 2.484 15.498 3.336 16.983L2.005 22L7.145 20.618C8.58 21.464 10.25 21.956 12.005 21.956C17.53 21.956 22.005 17.475 22.005 11.95C22.005 6.425 17.53 1.95 12.005 2V2Z" fill="white"/>
+                </svg>
+                Chatear por WhatsApp
+            </a>
+
+            <div class="contacto-info-extra">
+                <p><strong>Horario:</strong> Lunes a Sábado, 9:00am - 6:00pm</p>
+            </div>
+
+            <!-- Botón Volver -->
+            <a href="index.html" class="btn-volver">&larr; Volver al inicio</a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">GOLDEN LONDONS</div> 
+                <p style="max-width: 300px; color: #777;">Accesorios modernos para gente con estilo.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px; text-transform: uppercase; font-size: 0.9rem;">Ayuda</h4>
+                <p style="color: #777; font-size: 0.85rem;">Envíos y Devoluciones</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 GOLDEN LONDONS.
+        </div>
+    </footer>
+
+    <!-- SCRIPT DEL MENÚ (Necesario también aquí) -->
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        menuToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+    </script>
+</body>
+</html>

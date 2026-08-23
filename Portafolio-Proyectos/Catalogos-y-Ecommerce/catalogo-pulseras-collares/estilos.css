@@ -1,0 +1,730 @@
+/* --- IMPORTAR FUENTES ELEGANTES AUTOMÁTICAMENTE --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+
+/* 1. VARIABLES - NUEVA PALETA DE COLORES (PERSONALIZADA) */
+:root {
+/* Paleta Original Restaurada */
+    /* Paleta Original Restaurada */
+    --color-fondo: #fdfbf7;       /* Crema muy suave */
+    --color-texto: #4a4a4a;       /* Gris oscuro suave */
+    --color-acento: #b08d74;      /* Bronce/Tierra elegante */
+    --color-suave: #f2efe9;       /* Beige suave */
+    --color-detalles: #e0e0e0;    /* Gris claro para detalles sutiles */
+    
+    /* Fuentes Elegantes pero Modernas */
+    --fuente-titulos: 'Playfair Display', serif; /* Elegante (con serifa) */
+    --fuente-texto: 'Lato', sans-serif;          /* Limpia y fácil de leer */
+}
+
+/* 2. RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-texto);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 3. MARQUESINA (TICKER) */
+.ticker-wrap {
+    width: 100%;
+    background-color: var(--color-acento); /* Barra color Vino */
+    color: #EFE9E1; /* Texto crema para contraste suave */
+    overflow: hidden;
+    padding: 12px 0;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.ticker {
+    display: inline-block;
+    animation: marquee 35s linear infinite;
+    font-family: var(--fuente-texto);
+    font-weight: 300;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* 4. NAVEGACIÓN */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 5%;
+    border-bottom: 1px solid rgba(50, 45, 41, 0.1); /* Borde sutil */
+    position: sticky;
+    top: 0;
+    background: rgba(239, 233, 225, 0.98); /* Color fondo (#EFE9E1) con transparencia */
+    z-index: 100;
+}
+
+.logo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-texto);
+}
+.logo img{
+    height: 45px;
+    width: auto;
+    display:block;
+}
+
+/* Menú Escritorio */
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--color-texto);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover, .nav-menu a.active-link {
+    color: var(--color-acento);
+}
+
+/* Botón Hamburguesa */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 200; 
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-texto);
+    margin: 6px 0;
+    transition: 0.3s;
+}
+
+/* 5. HERO (PORTADA) */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    background-color: var(--color-suave); /* Fondo un poco más oscuro (#D1C7BD) */
+    padding-bottom: 0;
+}
+
+.hero-media {
+    width: 100%;
+    height: auto; 
+    min-height: 200px;
+    background-color: #D9D9D9; /* El gris de la paleta como placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-media img, 
+.hero-media video {
+    width: 100%;
+    height: auto;
+    object-fit: contain; 
+    display: block;
+}
+
+.hero-content {
+    padding: 60px 20px;
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: var(--color-texto);
+    letter-spacing: -1px;
+}
+
+.outline-text {
+    color: var(--color-acento); /* Rojo Vino */
+    font-style: italic;
+    -webkit-text-stroke: 0;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 550px;
+    margin: 0 auto 35px auto;
+    font-weight: 300;
+    color: #4a4a4a; /* Un gris oscuro para lectura sobre el fondo taupe */
+    line-height: 1.6;
+}
+
+.btn-principal {
+    background-color: var(--color-texto);
+    color: #EFE9E1;
+    padding: 16px 45px;
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    border: 1px solid var(--color-texto);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-principal:hover {
+    background-color: transparent;
+    color: var(--color-texto);
+    border-color: var(--color-texto);
+}
+
+/* 6. GRID DE PRODUCTOS */
+.shop-section {
+    padding: 80px 5%;
+    background-color: var(--color-fondo);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--color-detalles); /* Marrón medio */
+    padding-bottom: 20px;
+}
+
+.section-title {
+    font-family: var(--fuente-titulos);
+    font-size: 2.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-texto);
+    letter-spacing: 1px;
+}
+
+.ver-todo {
+    text-decoration: none;
+    color: var(--color-texto);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--color-acento);
+    padding-bottom: 3px;
+}
+
+.grid-productos {
+    display: flex;                 /* Los pone en fila india */
+    gap: 30px;                     /* Espacio entre cada tarjeta */
+    overflow-x: auto;              /* Permite deslizar hacia los lados */
+    padding-bottom: 30px;          /* Espacio abajo para que no se corte la sombra */
+    padding-left: 5%;              /* Margen izquierdo alineado con la web */
+    padding-right: 5%;             /* Margen derecho para poder ver el último */
+    
+    /* Efecto Imán (Snap) para que se detenga bonito */
+    scroll-snap-type: x mandatory; 
+    
+    /* Ocultar la barra de scroll (Estética limpia) */
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* IE/Edge */
+    
+    /* Suavidad en iPhone/Android */
+    -webkit-overflow-scrolling: touch; 
+}
+
+/* Ocultar barra en Chrome/Safari */
+.grid-productos::-webkit-scrollbar {
+    display: none;
+}
+
+/* Las tarjetas individuales */
+.grid-productos .product-card {
+    /* IMPORTANTE: */
+    flex: 0 0 auto;                /* Evita que se aplasten */
+    width: 280px;                  /* Ancho fijo de cada tarjeta */
+    scroll-snap-align: center;     /* Al soltar, la tarjeta se centra */
+}
+
+
+
+.product-card {
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.3s;
+}
+
+.product-card:hover {
+    opacity: 0.9;
+}
+
+.product-img-container {
+    width: 100%;
+    height: 350px;
+    background-color: white;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.product-card:hover .product-img-container img {
+    transform: scale(1.03);
+}
+
+.etiqueta-nuevo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--color-acento); /* Etiqueta color vino */
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-name {
+    font-family: var(--fuente-titulos);
+    font-weight: 400;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    color: var(--color-texto);
+}
+
+.product-cat {
+    font-size: 0.7rem;
+    color: var(--color-detalles); /* Marrón medio */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-family: var(--fuente-texto);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-acento);
+}
+
+/* 7. FOOTER */
+footer {
+    background-color: var(--color-texto); /* Footer oscuro (#322D29) */
+    color: #EFE9E1;
+    padding: 80px 5%;
+    margin-top: auto; 
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.footer-logo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--color-acento); /* Logo en vino o dorado */
+    letter-spacing: 1px;
+}
+
+.social-links a {
+    color: #D1C7BD;
+    margin-right: 25px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--color-acento);
+}
+
+.copyright {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.7rem;
+    color: #AC9C8D;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   ESTILOS DE CONTACTO
+   ========================================= */
+.contacto-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background-color: var(--color-suave);
+}
+
+.contacto-card {
+    background: var(--color-fondo); /* Fondo Crema */
+    padding: 60px;
+    max-width: 550px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid white; /* Borde blanco sutil */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.contacto-card h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    text-transform: none;
+    font-style: italic;
+    color: var(--color-texto);
+}
+
+.contacto-desc {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.btn-whatsapp-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 18px 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.btn-whatsapp-full:hover {
+    background-color: var(--color-texto);
+    transform: translateY(-2px);
+}
+
+.contacto-info-extra {
+    margin-bottom: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-detalles);
+}
+
+.contacto-info-extra p {
+    margin: 10px 0;
+    color: var(--color-texto);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-volver {
+    color: var(--color-texto);
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.btn-volver:hover {
+    border-bottom: 1px solid var(--color-texto);
+}
+
+
+/* =========================================
+   CATÁLOGO DE PRODUCTOS
+   ========================================= */
+
+/* Cabecera del Catálogo */
+.catalogo-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-color: var(--color-fondo);
+}
+
+.catalogo-header h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 3.5rem;
+    color: var(--color-acento); /* Color Vino */
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.catalogo-header p {
+    font-family: var(--fuente-texto);
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1rem;
+}
+
+/* Contenedor Principal */
+.catalogo-main {
+    padding: 20px 5% 80px;
+    background-color: var(--color-fondo);
+}
+
+/* La Rejilla (Grid) */
+.catalogo-grid {
+    display: grid;
+    /* Esto crea columnas automáticas que se adaptan al tamaño */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 60px 40px; /* 60px vertical, 40px horizontal */
+}
+
+/* TARJETA DE PRODUCTO ELEGANTE */
+.producto-elegante {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    group: pointer; /* Para detectar hover */
+    animation: fadeInUp 0.6s ease forwards; /* Animación de entrada */
+    opacity: 0; /* Empieza invisible para la animación */
+}
+
+/* Animación escalonada para que no aparezcan todos de golpe */
+.producto-elegante:nth-child(1) { animation-delay: 0.1s; }
+.producto-elegante:nth-child(2) { animation-delay: 0.2s; }
+.producto-elegante:nth-child(3) { animation-delay: 0.3s; }
+.producto-elegante:nth-child(4) { animation-delay: 0.4s; }
+.producto-elegante:nth-child(5) { animation-delay: 0.5s; }
+.producto-elegante:nth-child(6) { animation-delay: 0.6s; }
+
+/* El Marco de la Foto */
+.marco-foto {
+    width: 100%;
+    aspect-ratio: 4/5; /* Formato vertical elegante */
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.marco-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Zoom suave */
+}
+
+/* Efecto Zoom al pasar el mouse */
+.producto-elegante:hover .marco-foto img {
+    transform: scale(1.1);
+}
+
+/* Botón "Ver Detalles" que aparece */
+.overlay-accion {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(50, 45, 41, 0.2); /* Oscurece un poco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.4s ease;
+}
+
+.producto-elegante:hover .overlay-accion {
+    opacity: 1; /* Aparece al pasar mouse */
+}
+
+.btn-ver {
+    background-color: white;
+    color: var(--color-texto);
+    border: none;
+    padding: 12px 25px;
+    font-family: var(--fuente-texto);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transform: translateY(20px); /* Empieza un poco abajo */
+    transition: transform 0.4s ease;
+}
+
+.producto-elegante:hover .btn-ver {
+    transform: translateY(0); /* Sube a su sitio */
+}
+
+/* Etiquetas (Nuevo, Oferta) */
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--color-acento);
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.badge.venta {
+    background-color: var(--color-texto);
+}
+
+/* Información del texto */
+.info-producto {
+    text-align: center;
+}
+
+.info-producto h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    color: var(--color-texto);
+    font-weight: 400;
+}
+
+.material {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.precio {
+    font-family: var(--fuente-texto);
+    font-weight: bold;
+    color: var(--color-acento);
+    font-size: 1.1rem;
+}
+
+/* Animación de entrada (Fade In Up) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* =========================================
+   RESPONSIVE (MÓVIL Y TABLET)
+   ========================================= */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    .hero-media { height: auto;}
+    .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .footer-content { grid-template-columns: 1fr; gap: 40px; }
+    
+    .menu-toggle { display: block; z-index: 200; }
+
+    /* MENÚ LATERAL */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0; 
+        width: 80%;   
+        height: 100vh;
+        background-color: var(--color-fondo);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 150;
+    }
+
+    .nav-menu.active {
+        transform: translateX(0); 
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        font-size: 1.1rem;
+        font-family: var(--fuente-titulos);
+        text-transform: none;
+        font-style: italic;
+    }
+
+    .contacto-card { padding: 40px 20px; }
+    .contacto-card h1 { font-size: 2.2rem; }
+
+
+    /*estilos para catalogo*/
+    .catalogo-header h1 {
+        font-size: 2.5rem;
+    }
+    .catalogo-grid {
+        gap: 40px;
+    }
+}
