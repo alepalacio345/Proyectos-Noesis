@@ -1,0 +1,75 @@
+Comando 1: Encendiendo el motor local
+uvicorn whatsApp:app --host 127.0.0.1 --port 8000 --reload
+
+uvicorn: El programa servidor (ASGI) que toma tu código y lo pone a funcionar.
+whatsApp:app: El mapa para Uvicorn. whatsApp es el nombre de tu archivo Python (sin el .py), 
+y app es el nombre exacto de la variable donde inicializaste tu código (app = FastAPI()). 
+Si tu archivo se llamara main.py, esto sería main:app.
+
+--host 127.0.0.1: Le dice al servidor que se ancle a tu dirección IP local 
+(también conocida como localhost). Esto hace que el servidor sea privado y 
+solo exista dentro de tu computadora.
+
+--port 8000: Asigna el puerto de comunicaciones. Es la "puerta" virtual específica de 
+tu laptop por donde entrarán y saldrán los datos de este programa.
+
+--reload: Es el modo desarrollador. Le ordena a Uvicorn que vigile tu archivo Python 
+y reinicie el servidor automáticamente en milisegundos cada vez que presionas Ctrl + S 
+para guardar un cambio.
+
+
+
+
+Comando 2: Abriendo el túnel hacia internet
+ssh -p 443 -R0:127.0.0.1:8000 qr@a.pinggy.io
+
+
+ssh: Secure Shell. Es un protocolo diseñado para conectarse a servidores remotos. 
+Pinggy lo usa de forma muy inteligente para crear un tubo seguro entre tu laptop y 
+los servidores de ellos sin que tengas que instalar programas adicionales.
+
+-p 443: Fuerza al túnel a usar el puerto 443 de salida. Este es el puerto universal 
+para tráfico web seguro (HTTPS). Al usarlo, te aseguras de que el router de tu casa 
+o el proveedor de internet no bloqueen la conexión pensando que es tráfico extraño.
+
+-R0:127.0.0.1:8000: La regla de reenvío inverso (Reverse Forwarding). El -R0 le pide a 
+Pinggy que te asigne una URL pública aleatoria. Luego, le indica que todo el tráfico 
+que golpee esa URL pública debe ser desviado exactamente a tu 127.0.0.1 (tu máquina local) 
+directo al puerto 8000 (donde Uvicorn está escuchando).
+
+qr@a.pinggy.io: Es la dirección del servidor de Pinggy. El detalle clave aquí es el 
+usuario qr: es un comando especial de Pinggy que hace que la terminal te dibuje un 
+código QR gigante con tu nueva URL pública al conectarte, haciéndote la vida más fácil.
+
+
+
+
+
+ruta de la carpeta del entorno virtual: cd ./Portafolio-Proyectos/Bots-y-Automatizacion
+encender entorno virtual: bot_whats/Scripts/activate
+
+
+
+
+
+1. Para crear el archivo (Exportar)
+Con tu entorno virtual actual encendido, ve a la terminal de VS Code y escribe este comando:
+
+Bash
+pip freeze > requirements.txt
+
+pip freeze: Imprime la lista de todo lo que tienes instalado (FastAPI, Uvicorn, etc.).
+>: Redirige esa lista y la guarda dentro de un archivo de texto nuevo. 
+Si miras el explorador de archivos a tu izquierda, verás que apareció el requirements.txt.
+
+
+2. Para instalar desde el archivo (Importar)
+Cuando crees un entorno virtual completamente nuevo (o te lleves el código a otra laptop), 
+primero enciendes ese nuevo entorno. Luego, asegurándote de estar en la carpeta donde guardaste 
+el archivo de texto, ejecutas:
+
+Bash
+pip install -r requirements.txt
+
+La -r significa read (leer). Le estás diciendo a pip: "No me instales una librería suelta, 
+lee este archivo e instálame de golpe todo lo que está ahí adentro".
