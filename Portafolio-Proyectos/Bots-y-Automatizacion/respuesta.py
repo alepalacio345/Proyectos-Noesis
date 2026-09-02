@@ -1,9 +1,9 @@
 import requests
 
-def enviar_mensaje(info):
+def respuesta_bot(info):
     # --- 1. TUS CREDENCIALES ---
     # Reemplaza esto con el token larguísimo que generaste
-    TOKEN = "EAAbiqvdu6agBSUv7JHRpY4GxoBUpVash4TBXnbdk6LkivszOva3R7jaHiPVROoQ2yUcTbTf1ofkId4G8yYTcZBqWDC1vKf0nsiZAdptAGGk0L01bYWTXZC7DZBYuAVAZBkbrX3KxqvZCCbfZBnlPMDPE3QJNAZBAcy0ZAotFRgUn5hoBWnYMUKy9DuMf0erW79umQKL8WkGwwiTCmCByH1CvvtMoyhxVSLC3W9Sd081xs0M9GDsu0tLrZCk2k9cqadRMODbqyEQkIkDh3cM3OCryC7"
+    TOKEN = "EAAbiqvdu6agBSVNEaVisrloW5WUCtfglTy8gC0VLsGZC4ZBZA5OSxMmOfZBhdLJkjsVMiqb0rvCvsXq4wL8SE8FuZCsLsK4OrACteYnwOYvjQRJHpuvtqSFeGi7xu4uHXEJUJAL4SCPjHTF6cdO352mSt9erZCV8qTO2ZCUZCQ4zo5vKu4m0Fagnw9GcxVMEGXsbNz3Hag85By9h1HzmPZAHZBLJJ7igK8FPJk3wZBsSjZAEFia8uu1hJpO5tbg4LcdIhT49IG8wNnQyrj2zZBYDZAOZA8c"
 
     # Reemplaza esto con el Identificador de número de teléfono (solo números)
     PHONE_NUMBER_ID = "1092485180613674"

@@ -1,10 +1,14 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import PlainTextResponse
-from enviar import enviar_mensaje
+from respuesta import respuesta_bot
+import time
 
 app = FastAPI()
 
 TOKEN_SECRETO = "noesis_secreto_123"
+
+sesiones_usuarios = {}
+TIEMPO_DE_SESION = 120
 
 @app.get("/")
 def verificar(request: Request):
@@ -30,30 +34,38 @@ async def recibir_mensaje(request: Request):
     # await le dice espera que se descargue todo y request.json() convierte el json en diccionario
 
     try:
-        #meta datos o datos de cabezera
-        sub_diccionario = diccionario_general['entry'][0]['changes'][0]
+        #id del usuario
+        id_usuario = diccionario_general['entry'][0]['changes'][0]["value"]["messages"][0]["from"]
+        tiempo_actual = time.time() #pedimos el tiempo actual
 
-        #accedemos al texto
-        texto_mensaje = sub_diccionario["value"]["messages"][0]["text"]["body"]
+        if id_usuario not in sesiones_usuarios:
+            sesiones_usuarios[id_usuario] = 0
 
-        #convierto todo en minusculas
-        texto_mensaje = texto_mensaje.lower()
+        tiempo_inactivo = tiempo_actual - sesiones_usuarios[id_usuario]
 
-        if texto_mensaje == "this is a text message":
+        #Si pasaron más de 30 segundos (o si era nuevo y tenía tiempo 0)
+        if tiempo_inactivo > TIEMPO_DE_SESION:
 
-            enviar_mensaje("Estos son los datos\nCedula: 31456395\nBanco: 0102\ntelefono: 04127426581")
+            sesiones_usuarios[id_usuario] = tiempo_actual
+            respuesta_bot("Hola soy Gustabo es un placer\n¿En que puedo ayudarte?\n\nHacer pago de producto escribe la palabra pago\ninfo de proyectos Escribe proyectos\nInfo de creacion Escribe quien eres")
+        else:    
+            #accedemos al texto
+            texto_mensaje = diccionario_general['entry'][0]['changes'][0]["value"]["messages"][0]["text"]["body"]
+            #convierto todo en minusculas
+            texto_mensaje = texto_mensaje.lower()
 
-        elif texto_mensaje == "proyectos":
-
-            enviar_mensaje("ferrys, radio, pokemon")
-
-        elif texto_mensaje == "quien eres":
-
-            enviar_mensaje("soy un asistente virtual creado para ayudarte en lo que necesites\n mi creador es Saul lara")
-
-        else: 
-            print("opcion invalida")
-            enviar_mensaje("opcion invalida")
+            if texto_mensaje == "pago":
+                respuesta_bot("Estos son los datos\nCedula: 31456395\nBanco: 0102\ntelefono: 04127426581")
+                    
+            elif texto_mensaje == "proyectos":
+                respuesta_bot("ferrys, radio, pokemon")
+                    
+            elif texto_mensaje == "quien eres":
+                respuesta_bot("soy un asistente virtual creado para ayudarte en lo que necesites\nmi creador es Saul Alejandro Lara Palacio")
+                    
+            else: 
+                print("opcion invalida")
+                respuesta_bot("opcion invalida")
 
     except KeyError:
         print("Error al cargar json")
