@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import PlainTextResponse
+from enviar import enviar_mensaje
 
 app = FastAPI()
 
@@ -25,6 +26,36 @@ def verificar(request: Request):
 
 @app.post("/")
 async def recibir_mensaje(request: Request):
-    datos = await request.json()
-    print("Mensaje recibido:", datos)
+    diccionario_general = await request.json()
+    # await le dice espera que se descargue todo y request.json() convierte el json en diccionario
+
+    try:
+        #meta datos o datos de cabezera
+        sub_diccionario = diccionario_general['entry'][0]['changes'][0]
+
+        #accedemos al texto
+        texto_mensaje = sub_diccionario["value"]["messages"][0]["text"]["body"]
+
+        #convierto todo en minusculas
+        texto_mensaje = texto_mensaje.lower()
+
+        if texto_mensaje == "this is a text message":
+
+            enviar_mensaje("Estos son los datos\nCedula: 31456395\nBanco: 0102\ntelefono: 04127426581")
+
+        elif texto_mensaje == "proyectos":
+
+            enviar_mensaje("ferrys, radio, pokemon")
+
+        elif texto_mensaje == "quien eres":
+
+            enviar_mensaje("soy un asistente virtual creado para ayudarte en lo que necesites\n mi creador es Saul lara")
+
+        else: 
+            print("opcion invalida")
+            enviar_mensaje("opcion invalida")
+
+    except KeyError:
+        print("Error al cargar json")
+
     return {"status": "ok"}

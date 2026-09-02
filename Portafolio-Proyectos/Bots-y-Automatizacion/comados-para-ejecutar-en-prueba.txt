@@ -46,6 +46,7 @@ código QR gigante con tu nueva URL pública al conectarte, haciéndote la vida 
 
 
 ruta de la carpeta del entorno virtual: cd ./Portafolio-Proyectos/Bots-y-Automatizacion
+crear el entorno: python -m venv bot_whats
 encender entorno virtual: bot_whats/Scripts/activate
 
 
