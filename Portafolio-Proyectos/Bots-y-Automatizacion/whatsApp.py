@@ -16,58 +16,65 @@ def verificar(request: Request):
     hub_challenge = request.query_params.get("hub.challenge")
     hub_verify_token = request.query_params.get("hub.verify_token")
 
-    print(f"--- META ESTÁ TOCANDO LA PUERTA ---")
-    print(f"Token recibido: {hub_verify_token}")
-    print(f"Challenge recibido: {hub_challenge}")
-
     if hub_mode == "subscribe" and hub_verify_token == TOKEN_SECRETO:
         print("¡ÉXITO! Token validado correctamente.")
-        # Devolvemos el challenge en texto puro, sin formato JSON
         return PlainTextResponse(content=hub_challenge)
     
-    print("Fallo: El token no coincide.")
     return PlainTextResponse(content="Token invalido", status_code=403)
 
 @app.post("/")
 async def recibir_mensaje(request: Request):
     diccionario_general = await request.json()
-    # await le dice espera que se descargue todo y request.json() convierte el json en diccionario
 
     try:
-        #id del usuario
-        id_usuario = diccionario_general['entry'][0]['changes'][0]["value"]["messages"][0]["from"]
-        tiempo_actual = time.time() #pedimos el tiempo actual
+        # Atrapamos el bloque del mensaje para extraer datos sin que quede tan largo
+        mensaje_data = diccionario_general['entry'][0]['changes'][0]["value"]["messages"][0]
+        id_usuario = mensaje_data["from"]
+        tiempo_actual = time.time() 
 
         if id_usuario not in sesiones_usuarios:
             sesiones_usuarios[id_usuario] = 0
 
         tiempo_inactivo = tiempo_actual - sesiones_usuarios[id_usuario]
 
-        #Si pasaron más de 30 segundos (o si era nuevo y tenía tiempo 0)
         if tiempo_inactivo > TIEMPO_DE_SESION:
-
             sesiones_usuarios[id_usuario] = tiempo_actual
-            respuesta_bot("Hola soy Gustabo es un placer\n¿En que puedo ayudarte?\n\nHacer pago de producto escribe la palabra pago\ninfo de proyectos Escribe proyectos\nInfo de creacion Escribe quien eres")
+            
+            bienvenida = "¡Hola! 👋 Soy *Gustavo*, tu asistente virtual.\n\nEs un gran placer saludarte. ¿En qué te puedo ayudar el día de hoy? 👇"
+            # Le pasamos el parámetro tipo="botones" para que mande el menú interactivo
+            respuesta_bot(bienvenida, id_usuario, tipo="botones")
+            
         else:    
-            #accedemos al texto
-            texto_mensaje = diccionario_general['entry'][0]['changes'][0]["value"]["messages"][0]["text"]["body"]
-            #convierto todo en minusculas
-            texto_mensaje = texto_mensaje.lower()
+            # Validación inteligente: detecta si escribieron a mano o tocaron un botón
+            if "text" in mensaje_data:
+                texto_mensaje = mensaje_data["text"]["body"].lower()
+            elif "interactive" in mensaje_data:
+                texto_mensaje = mensaje_data["interactive"]["button_reply"]["id"].lower()
+            else:
+                texto_mensaje = "" # Por si mandan una nota de voz o sticker
 
             if texto_mensaje == "pago":
-                respuesta_bot("Estos son los datos\nCedula: 31456395\nBanco: 0102\ntelefono: 04127426581")
+                msj_pago = "¡Claro que sí! 💳 Aquí tienes los datos para realizar tu transferencia de forma segura:\n\n👤 *Titular:* Saúl Alejandro Lara Palacio\n🪪 *C.I:* 31.456.395\n🏦 *Banco:* Banco de Venezuela (0102)\n📱 *Teléfono:* 0412-7426581\n\nPor favor, envíame la captura del comprobante por aquí mismo cuando estés listo. ✅"
+                respuesta_bot(msj_pago, id_usuario)
                     
             elif texto_mensaje == "proyectos":
-                respuesta_bot("ferrys, radio, pokemon")
+                msj_proyectos = "¡Genial! 🚀 Actualmente mi creador está trabajando en estas iniciativas increíbles:\n\n⛴️ *Ferrys:* Sistema de gestión y logística.\n📻 *Radio:* Plataforma moderna de transmisión.\n👾 *Pokémon:* Desarrollo estructural de El Gran Torneo en lenguaje C.\n\n¿Deseas saber más detalles sobre alguno?"
+                respuesta_bot(msj_proyectos, id_usuario)
+            
+            elif texto_mensaje == "productos":
+                msj_productos = "¡Excelente elección! 🛒 Aquí tienes nuestra lista de inventario disponible hoy:\n\n🌽 Harina Pan\n🍚 Arroz Entero\n🍝 Pasta Larga\n🍬 Azúcar Refinada\n\nIndícame cuáles deseas encargar y te tomaré el pedido de inmediato."
+                respuesta_bot(msj_productos, id_usuario)
                     
             elif texto_mensaje == "quien eres":
-                respuesta_bot("soy un asistente virtual creado para ayudarte en lo que necesites\nmi creador es Saul Alejandro Lara Palacio")
+                msj_quien_soy = "¡Hola! 🤖 Soy *Gustavo*, tu asistente virtual de confianza.\n\nFui programado con mucho cuidado por mi creador, *Saúl Alejandro Lara Palacio*, para automatizar tareas y brindar respuestas rápidas. ¡Estoy aquí para hacerte la vida más fácil! ✨"
+                respuesta_bot(msj_quien_soy, id_usuario)
                     
             else: 
-                print("opcion invalida")
-                respuesta_bot("opcion invalida")
+                print("Opción inválida recibida")
+                msj_error = "Ups... 😅 No logré entender ese comando.\n\nPor favor, elige una de las opciones del menú principal tocando los botones, o escribe *pago*, *proyectos* o *productos*."
+                respuesta_bot(msj_error, id_usuario)
 
     except KeyError:
-        print("Error al cargar json")
+        pass # Ignoramos errores de estado silenciosamente (como notificaciones de mensaje leído)
 
     return {"status": "ok"}
