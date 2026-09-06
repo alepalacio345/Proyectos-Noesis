@@ -1,10 +1,17 @@
 import requests
+from detenv import load_dotenv
+
+#llamamos a la funcion con las llaves
+load_dotenv()
 
 def respuesta_bot(info, numero_destino, tipo="texto"):
-    # --- 1. TUS CREDENCIALES ---
-    TOKEN = "EAAbiqvdu6agBSdDWojZApZBC0avwMBBihhthIrs2DRCyY9Ux5P5fw41DNhRZBk8ZBvFgxq9baSG9jSEKEdge9CS5pMHSKwNKSGLOjnDTBZCt6fZClqpXyLx4u066dPHOjlYbAn13PJNNPMqVynhxiRWnLRSbrlFqMrpauom1ZAK0AujnyM0FL4hawx7iCZCjIgZDZD"
-    PHONE_NUMBER_ID = "1345165362005492"
+    
+    
+    TOKEN = os.getenv("TOKEN")
+    PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID")
 
+    # --- 2. CONFIGURACIÓN DE LA PETICIÓN ---
+    # Esta es la dirección oficial a la que le tocamos la puerta a Meta
     url = f"https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages"
     headers = {
         "Authorization": f"Bearer {TOKEN}",
